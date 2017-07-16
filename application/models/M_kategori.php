@@ -17,7 +17,7 @@ class M_kategori extends CI_Model {
         public function get_sub_kategori_1_user()
         {       $id_user=$this->input->post('id_user');
                 $id_kategori_parent=$this->input->post('id_kategori_parent');
-                $this->db->select('id_kategori,hex(id_user) as id_user,kategori,tb_kategori_children_1');
+                $this->db->select('id_kategori,hex(id_user) as id_user,kategori,id_kategori_children_1');
                 $this->db->where('hex(id_user)', $id_user);
                 $this->db->where('(id_kategori_parent)', $id_user);
                 $query = $this->db->get('tb_kategori_children_1');
