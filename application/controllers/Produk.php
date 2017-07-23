@@ -110,6 +110,39 @@ class Produk extends CI_Controller {
          ), JSON_PRETTY_PRINT);
         }
     }
+    public function get_all_produk_kategori()
+    {
+        $sub_kategori = ($this->input->get('sub_kategori')) ? $this->input->get('sub_kategori') : 0 ;
+        if ($sub_kategori) {
+            $kategori=array(
+                'parent_id' => $this->input->get('kategori'),
+                'child_1' => $sub_kategori);
+        }else{
+            $kategori=array(
+                'parent_id' => $this->input->get('kategori'));
+        }
+        $kategori=json_encode($kategori);
+        $kategori=rtrim($kategori,"}");
+        if($kategori!='{"parent_id":null'){
+        $data=$this->M_Produk->get_all_produk_kategori($kategori);
+        if ($data) {
+            echo json_encode(array(
+                'status' =>'berhasil' ,
+                'data'=>$data
+             ), JSON_PRETTY_PRINT);
+            }else{
+                echo json_encode(array(
+                    'status' =>'gagal' ,
+                    'alasan'=>'empty data'
+                 ), JSON_PRETTY_PRINT);
+            }
+        }else {
+            echo json_encode(array(
+                'status' =>'gagal' ,
+                'alasan'=>'empty kategori'
+             ), JSON_PRETTY_PRINT);
+        }
+    }
     public function get_all_produk_user()
     {
         $id_user=$this->input->post('id_user');
@@ -152,7 +185,7 @@ class Produk extends CI_Controller {
             if ($sub_kategori) {
                 $kategori=array(
                     'parent_id' => $this->input->post('kategori'),
-                    'child_1' => $sub_kategori;
+                    'child_1' => $sub_kategori);
             }else{
                 $kategori=array(
                     'parent_id' => $this->input->post('kategori'));
@@ -161,8 +194,8 @@ class Produk extends CI_Controller {
                     'id_produk'        => $id_produk,
                     'kategori'         => json_encode($kategori),
                     'id_toko'          => $this->input->post('id_toko'),
-                    'barcode'          => $this->input->post('barcode'),
                     'nama_produk'      => $this->input->post('nama_produk'),
+                    'barcode'          => $this->input->post('barcode'),
                     'harga'            => $this->input->post('harga'),
                     'satuan'           => $this->input->post('satuan'),
                     'detail'           => $this->input->post('detail'),

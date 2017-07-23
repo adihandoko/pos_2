@@ -30,13 +30,30 @@ class M_produk extends CI_Model {
                 $query = $this->db->get('tb_produk');
                 return $query->result();
         }
+        public function get_all_produk_kategori($kategori)
+        {
+                $this->db->select('
+                        HEX(id_produk) as id_produk, 
+                        hex(tb_produk.`id_toko`) as id_toko,
+                        `kategori`,
+                        `nama_produk`, 
+                        `harga`, 
+                        `satuan`, 
+                        `detail`, 
+                        `stok`, 
+                        `tgl_input`, 
+                        `jenis`');
+                $this->db->where("tb_produk.kategori LIKE '%".$kategori."%'");
+                $query = $this->db->get('tb_produk');
+                return $query->result();
+        }
         public function get_all_produk_toko_jml($id_toko)
         {
                 $this->db->select(' count(id_produk) as jml');
                 $this->db->join('tb_toko','tb_toko.id_toko=tb_produk.id_toko');
                 $this->db->where('hex(tb_produk.id_toko)="'.$id_toko.'"');
                 $query = $this->db->get('tb_produk');
-                return $query->result()[];
+                return $query->result()[0]->jml;
         }
         public function get_all_produk_user($id_user)
         {
