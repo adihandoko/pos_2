@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2017 at 01:56 AM
+-- Generation Time: Jul 30, 2017 at 03:58 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -66,6 +66,13 @@ CREATE TABLE `tb_kategori_children_1` (
   `aktif` int(11) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_kategori_children_1`
+--
+
+INSERT INTO `tb_kategori_children_1` (`id_kategori`, `id_user`, `id_kategori_parent`, `kategori`, `aktif`) VALUES
+(1, 0x05f18b7566a0444888d50abfead883cb, 1, '11', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -98,7 +105,8 @@ CREATE TABLE `tb_kategori_parent` (
 --
 
 INSERT INTO `tb_kategori_parent` (`id_kategori`, `id_user`, `kategori`, `aktif`) VALUES
-(1, 0x3316be5770864b1aaf5133bbf686f41d, 'kat', 1);
+(1, 0x3316be5770864b1aaf5133bbf686f41d, 'kat', 1),
+(2, 0x2f949fc9875548dfb95776e550f8fc6b, 'q', 1);
 
 -- --------------------------------------------------------
 
@@ -208,6 +216,13 @@ CREATE TABLE `tb_produk` (
   `aktif` varchar(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_produk`
+--
+
+INSERT INTO `tb_produk` (`id_produk`, `id_toko`, `barcode`, `kategori`, `nama_produk`, `harga`, `satuan`, `detail`, `stok`, `tgl_input`, `jenis`, `tgl_update`, `aktif`) VALUES
+(0x0c0226872a804cc396c7005ab99e3284, 0xaf7f77de12294104a66b2effc5142398, NULL, '{"parent_id":"2","child_1":0}', 'q', 1, 'pcs', 'q', 1, '2017-07-15 14:16:42', 'ready', '2017-07-15 14:16:42', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -230,6 +245,7 @@ CREATE TABLE `tb_toko` (
 --
 
 INSERT INTO `tb_toko` (`id_toko`, `id_user`, `nama_toko`, `username`, `password`, `alamat`, `no_telp`, `aktif`) VALUES
+(0xaf7f77de12294104a66b2effc5142398, 0x2f949fc9875548dfb95776e550f8fc6b, 'q', 'q', '7694f4a66316e53c8cdd9d9954bd611d', 'q', 'q', 1),
 (0xf1460225e60247aca59b124f8f3814a3, 0x3316be5770864b1aaf5133bbf686f41d, 'adamista', 'adi', 'c46335eb267e2e1cde5b017acb4cd799', 'terban', '098123', 1);
 
 -- --------------------------------------------------------
@@ -255,6 +271,7 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `id_facebook`, `username`, `password`, `nama_lengkap`, `email`, `no_telp`, `alamat`, `aktif`) VALUES
+(0x2f949fc9875548dfb95776e550f8fc6b, NULL, 'q', '7694f4a66316e53c8cdd9d9954bd611d', 'q', 'q', 'q', 'q', 1),
 (0x3316be5770864b1aaf5133bbf686f41d, 'banteng', 'adi', 'c46335eb267e2e1cde5b017acb4cd799', 'adi', 'adihandoko2@gmail.com', '09871', 'terban', 1),
 (0x75161c20bea8410bbbb060eb8e39146f, NULL, 'w', 'f1290186a5d0b1ceab27f4e77c0c5d68', 'w', 'ww', 'w', 'w', 1);
 
@@ -384,7 +401,7 @@ ALTER TABLE `tb_gambar`
 -- AUTO_INCREMENT for table `tb_kategori_children_1`
 --
 ALTER TABLE `tb_kategori_children_1`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_kategori_children_2`
 --
@@ -394,7 +411,7 @@ ALTER TABLE `tb_kategori_children_2`
 -- AUTO_INCREMENT for table `tb_kategori_parent`
 --
 ALTER TABLE `tb_kategori_parent`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_menu`
 --
